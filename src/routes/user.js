@@ -1,11 +1,11 @@
 const router = require("express").Router();
 
 router.get("/user/signin", (req, res) => {
-  res.send("Ingresando a la app");
+  res.render("user/signin");//vista signin.hbs
 });
 
 router.get("/user/signup", (req, res) => {
-  res.send("Formulario de authentication");
+  res.render("user/signup");//vista signup.hbs
 });
 
 module.exports = router;
