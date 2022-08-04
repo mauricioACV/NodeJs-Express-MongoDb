@@ -27,8 +27,25 @@ router.post("/note/new-note", async (req, res) => {
   }
 });
 
-router.get("/notes", (req, res) => {
-  res.send("Notes from database");
+router.get("/notes", async (req, res) => {
+  const notes = await Note.find().sort({ date: "desc" }).lean();
+  res.render("note/all-notes", { notes });
+});
+
+router.get("/note/edit/:id", async (req, res) => {
+  const note = await Note.findById(req.params.id).lean();
+  res.render("note/edit-note", { note });
+});
+
+router.put("/note/update-note/:id", async (req, res) => {
+  const { title, description } = req.body;
+  await Note.findByIdAndUpdate(req.params.id, { title, description });
+  res.redirect("/notes");
+});
+
+router.delete("/note/delete-note/:id", async (req, res) => {
+  await Note.findByIdAndDelete(req.params.id);
+  res.redirect("/notes");
 });
 
 module.exports = router;
