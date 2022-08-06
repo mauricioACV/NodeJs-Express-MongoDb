@@ -30,6 +30,10 @@
   <body>
     <p>Navigation</p>
     <main class="container">
+      {{!-- vista partials messages.hbs --}}
+      {{> messages}}
+      {{!-- vista partials erros.hbs --}}
+      {{> errors}}
       {{{body}}}
     </main>
     <p>Footer</p>
