@@ -10,12 +10,12 @@
             <a href="/note/edit/{{_id}}"><i class="fas fa-edit"></i></a>
           </h4>
           <p>{{description}}</p>
-          <form
-            action="/note/delete-note/{{_id}}?_method=DELETE"
-            method="POST"
-          >
+          <form action="/note/delete-note/{{_id}}?_method=DELETE" method="POST">
             <input type="hidden" name="_method" value="DELETE" />
-            <button class="btn btn-danger btn-block btn-sm" type="submit">Delete</button>
+            <button
+              class="btn btn-danger btn-block btn-sm"
+              type="submit"
+            >Delete</button>
           </form>
         </div>
       </div>
@@ -23,6 +23,7 @@
   {{else}}
     <div class="card mx-auto">
       <div class="card-body">
+        <h1>Hello {{user.name}}</h1>
         <p class="lead">There are not notes yet</p>
         <a href="/note/add" class="btn btn-success btn-block">Create one!</a>
       </div>

@@ -12,7 +12,7 @@ passport.use(
       if (!user) {
         return done(null, false, { message: "Not User Found." });
       } else {
-        const match = await User.matchPassword(password);
+        const match = await user.matchPassword(password);
         if (match) {
           return done(null, user);
         } else {

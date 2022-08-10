@@ -1,10 +1,20 @@
 const router = require("express").Router();
+const passport = require("passport");
 
 const User = require("../models/User");
 
 router.get("/user/signin", (req, res) => {
   res.render("user/signin"); //vista signin.hbs
 });
+
+router.post(
+  "/user/signin",
+  passport.authenticate("local", {
+    successRedirect: "/notes",
+    failureRedirect: "/user/signin",
+    failureFlash: true,
+  })
+);
 
 router.get("/user/signup", (req, res) => {
   res.render("user/signup"); //vista signup.hbs
@@ -52,6 +62,13 @@ router.post("/user/signup", async (req, res) => {
       res.redirect("/user/signin");
     }
   }
+});
+
+router.get("/user/logout", (req, res, next) => {
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    res.redirect('/');
+  });
 });
 
 module.exports = router;
